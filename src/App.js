@@ -1,4 +1,3 @@
-import './App.css';
 import TextScrambler from './scramble';
 
 // Main App Component
