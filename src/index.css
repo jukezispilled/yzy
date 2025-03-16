@@ -8,9 +8,13 @@
     /* Other font formats (woff, woff2, etc.) could also be added here */
 }
 
-html {
-    background-color: white;
-}
 body {
-    background-color: white;
+    background-color: #ffffff; /* White background */
+    margin: 0;
+    padding: 0;
+}
+  
+#root {
+    min-height: 100vh;
+    background-color: #ffffff;
 }
