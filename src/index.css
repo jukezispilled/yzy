@@ -10,8 +10,6 @@
 
 body {
     background-color: #ffffff; /* White background */
-    margin: 0;
-    padding: 0;
 }
 
 @supports (padding: max(0px)) {
