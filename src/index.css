@@ -7,3 +7,10 @@
     src: url('/public/yzy.ttf') format('truetype');
     /* Other font formats (woff, woff2, etc.) could also be added here */
 }
+
+html {
+    background-color: white;
+}
+body {
+    background-color: white;
+}
