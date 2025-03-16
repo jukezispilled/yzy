@@ -13,3 +13,10 @@ body {
     margin: 0;
     padding: 0;
 }
+
+@supports (padding: max(0px)) {
+    body {
+      padding-top: max(0px, env(safe-area-inset-top));
+      background-color: white;
+    }
+}
