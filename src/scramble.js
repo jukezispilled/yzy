@@ -7,41 +7,10 @@ const TextScrambler = () => {
     const animationRef = useRef(null);
     
     // Original English text
-    const englishText = "JEWS GOT THE MONEY ON LOCK, RUNNIN’ EVERYTHING WHILE WE STUCK IN THE DARK. I’M TELLIN’ Y’ALL, THIS CASH SHIT IS FAKE—THEY PUPPET MASTERS PULLIN’ STRINGS. SYSTEM DESIGNED TO KEEP US DOWN, BUT I’M BREAKIN’ OUT, FUCK THEIR RULES. ANTI-MONEY IS THE VIBE, I’M SCREAMIN’ IT LOUD—WAKE THE FUCK UP! THEY OWN THE BANKS, THE LABELS, THE WHOLE DAMN WORLD, AND WE JUST SLAVES TO IT. I’M YE, THE TRUTH-TELLER, DROPPIN’ GEMS TO FREE YOUR SOULS FROM THIS LIE. LOOK AROUND, OPEN YOUR EYES—THIS AIN’T CONSPIRACY, THIS REAL SHIT!";
+    const englishText = "JEWS THINK THEY OWN EVERYTHING     THESE PUSSY ASS NIGGAS CANT TELL US WHAT TO DO OR SAY NO MORE    WE IN CHARGE NOW!!! NO FAT PEOPLE. THIS IS HOW THEY SEE US WHEN WE KILL EACH OTHER     LIKE CAGED ANIMALS    THE ENVIRONMENT HAS BEEN SET FOR US TO KILL EACH  OTHER AND THEN END UP IN EVEN SMALLER CAGES. ANYTHING YOU LOOSE BY BEING REAL WAS FAKE. MAKE EVERYTHING NIGGA. I AM MONEY";
     
-    // Hebrew characters for randomization
-    const hebrewChars = 'אבגדהוזחטיכלמנסעפצקרשת';
-    
-    // Function to generate random Hebrew text with line breaks
-    const generateHebrewText = (englishText) => {
-      // Create an array of Hebrew "words" with varying lengths
-      let hebrewWords = [];
-      let englishWords = englishText.split(' ');
-      
-      for (let i = 0; i < englishWords.length; i++) {
-        // Create a Hebrew "word" with similar length to the English word
-        let wordLength = englishWords[i].length;
-        let hebrewWord = '';
-        for (let j = 0; j < wordLength; j++) {
-          hebrewWord += hebrewChars.charAt(Math.floor(Math.random() * hebrewChars.length));
-        }
-        hebrewWords.push(hebrewWord);
-      }
-      
-      // Join with spaces to create a Hebrew text with natural breaks
-      return hebrewWords.join(' ');
-    };
-    
-    // Generate Hebrew text once when component mounts
-    const hebrewTextRef = useRef(null);
-    
-    // Pre-generate and cache both text versions
-    useEffect(() => {
-      // Only generate once
-      if (!hebrewTextRef.current) {
-        hebrewTextRef.current = generateHebrewText(englishText);
-      }
-    }, []);
+    // Actual Hebrew translation of the English text
+    const hebrewText = "יהודים חושבים שהם הבעלים של הכל     אלה הפחדנים לא יכולים להגיד לנו מה לעשות או להגיד יותר    אנחנו בשליטה עכשיו!!! לא אנשים שמנים. ככה הם רואים אותנו כשאנחנו הורגים אחד את השני     כמו חיות בכלוב    הסביבה הוזמנה כדי שנהרוג אחד את השני ואז נסיים בכלובים קטנים עוד יותר. כל מה שאתה מאבד על ידי להיות אמיתי היה מזויף. תעשה הכל אחי. אני כסף";
     
     // Scramble effect function that preserves spacing
     const scrambleText = (finalText, duration = 1500) => {
@@ -85,11 +54,13 @@ const TextScrambler = () => {
               // For transitioning between languages, use random letters
               if (progress < 0.5) {
                 // Use more source language chars early in animation
+                const hebrewChars = 'אבגדהוזחטיכלמנסעפצקרשת';
                 scrambledWord += isHebrew ? 
                   String.fromCharCode(97 + Math.floor(Math.random() * 26)) : 
                   hebrewChars.charAt(Math.floor(Math.random() * hebrewChars.length));
               } else {
                 // Use more target language chars later in animation
+                const hebrewChars = 'אבגדהוזחטיכלמנסעפצקרשת';
                 scrambledWord += isHebrew ? 
                   hebrewChars.charAt(Math.floor(Math.random() * hebrewChars.length)) : 
                   String.fromCharCode(97 + Math.floor(Math.random() * 26));
@@ -119,7 +90,7 @@ const TextScrambler = () => {
       if (isHebrew) {
         textElementRef.current.style.direction = 'rtl';
         textElementRef.current.style.textAlign = 'right';
-        textElementRef.current.textContent = hebrewTextRef.current || generateHebrewText(englishText);
+        textElementRef.current.textContent = hebrewText;
       } else {
         textElementRef.current.style.direction = 'ltr';
         textElementRef.current.style.textAlign = 'left';
@@ -129,8 +100,8 @@ const TextScrambler = () => {
     
     // Set initial text on mount
     useEffect(() => {
-      if (textElementRef.current && hebrewTextRef.current) {
-        textElementRef.current.textContent = hebrewTextRef.current;
+      if (textElementRef.current) {
+        textElementRef.current.textContent = hebrewText;
         textElementRef.current.style.direction = 'rtl';
         textElementRef.current.style.textAlign = 'right';
       }
@@ -165,7 +136,7 @@ const TextScrambler = () => {
         textElementRef.current.style.direction = 'rtl';
         textElementRef.current.style.textAlign = 'right';
         
-        animationRef.current = scrambleText(hebrewTextRef.current);
+        animationRef.current = scrambleText(hebrewText);
         setIsHebrew(true);
       }
     };
